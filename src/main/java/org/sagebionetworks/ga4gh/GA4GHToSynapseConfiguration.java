@@ -1,4 +1,4 @@
-package org.sagebionetworks.ga4ghtosynapse;
+package org.sagebionetworks.ga4gh;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

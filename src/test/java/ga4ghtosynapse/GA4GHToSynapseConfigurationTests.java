@@ -19,7 +19,7 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.sagebionetworks.ga4ghtosynapse.GA4GHToSynapseConfiguration;
+import org.sagebionetworks.ga4gh.GA4GHToSynapseConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.LocalServerPort;
@@ -46,15 +46,6 @@ public class GA4GHToSynapseConfigurationTests {
 
 	@Autowired
 	private TestRestTemplate testRestTemplate;
-
-	@Test
-	public void shouldReturn200WhenSendingRequestToController() throws Exception {
-		@SuppressWarnings("rawtypes")
-		ResponseEntity<Map> entity = this.testRestTemplate.getForEntity(
-				"http://localhost:" + this.port + "/hello-world", Map.class);
-
-		then(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
-	}
 
 	@Test
 	public void shouldReturn200WhenSendingRequestToManagementEndpoint() throws Exception {
