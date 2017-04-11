@@ -143,9 +143,7 @@ public class ToolDiscoveryController {
 	// TODO will this work or do we need to define a ToolList POJO???
 	@RequestMapping(value = "/tools", method = RequestMethod.GET)
     public @ResponseBody List<Tool> 
-    listTools(
-    		@PathVariable(value="registry-id", required=true) String toolId
-    		) {
+    listTools() {
     	List<Tool> tools = new ArrayList<Tool>();
     	// TODO populate tools
         return tools;
@@ -175,9 +173,7 @@ public class ToolDiscoveryController {
 	
 	@RequestMapping(value = "/tools/metadata", method = RequestMethod.GET)
     public @ResponseBody RegistryMetadata 
-    getRegistryMetadata(
-    		@PathVariable(value="registry-id", required=true) String toolId
-    		) {
+    getRegistryMetadata() {
 		RegistryMetadata metadata = new RegistryMetadata("v1", "us", "Synapse Tool Registry");
         return metadata;
     }

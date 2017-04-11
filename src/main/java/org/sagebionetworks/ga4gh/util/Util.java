@@ -29,6 +29,7 @@ public class Util {
     public static final String TABLE_NAME_TOOL_VERSION = "toolVersion";
     
     
+    // columns for 'tool' table
     public static final String TOOL_ID="toolId";
     public static final String AUTHOR="author";
     public static final String CONTAINS="contains";
@@ -38,6 +39,13 @@ public class Util {
     public static final String TOOL_NAME="toolname";
     public static final String TOOL_TYPE_ID="toolTypeId";
     public static final String VERSION="version";
+    
+    // columns for 'toolType' table
+    public static final String TYPE_ID = "id";
+    public static final String TYPE_NAME = "name";
+    public static final String TYPE_DESCRIPTION = "description";
+    
+    // columns for 'toolVersion' table
 
 	private SynapseClient synapse;
 
