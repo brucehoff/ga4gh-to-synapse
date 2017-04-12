@@ -3,12 +3,15 @@ package org.sagebionetworks.ga4gh.util;
 import static org.sagebionetworks.client.SynapseClient.COUNT_PARTMASK;
 import static org.sagebionetworks.client.SynapseClient.QUERY_PARTMASK;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.client.ClientProtocolException;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,6 +24,8 @@ import org.sagebionetworks.repo.model.table.RowSet;
 import org.sagebionetworks.repo.model.table.SelectColumn;
 
 public class Util {
+	public static final String REGISTRY = "https://www.synapse.org";
+	
     private static final long QUERY_PAGE_SIZE = 100;
     public static final long UPLOAD_ROWS_TIMEOUT_MILLIS = 1000L*300; // five minutes
     
@@ -38,7 +43,7 @@ public class Util {
     public static final String NAME="name";
     public static final String TOOL_NAME="toolname";
     public static final String TOOL_TYPE_ID="toolTypeId";
-    public static final String VERSION="version";
+    public static final String META_VERSION="metaVersion";
     
     // columns for 'toolType' table
     public static final String TYPE_ID = "id";
@@ -46,6 +51,12 @@ public class Util {
     public static final String TYPE_DESCRIPTION = "description";
     
     // columns for 'toolVersion' table
+    public static final String VERSION = "version";
+    public static final String IMAGE = "image";
+    public static final String DESCRIPTOR_DESCRIPTION = "descriptorDescription";
+    public static final String DESCRIPTOR_FILE = "descriptorFile";
+    public static final String DOCKERFILE_DESCRIPTION = "dockerfileDescription";
+    public static final String DOCKERFILE = "dockerfileFile";
 
 	private SynapseClient synapse;
 
@@ -74,6 +85,7 @@ public class Util {
 						tables.getJSONObject(i).getString("table.id")
 				);
 			}
+			System.out.println("getTables("+projectId+") result: "+result);
 			return result;
 		} catch (JSONException e) {
 			throw new RuntimeException(e);
@@ -125,5 +137,12 @@ public class Util {
 			result.getRows().addAll(pageResult.getRows());
        	}
        	return result;
+    }
+    
+    /*
+     * get the download url for a given entityId
+     */
+    public String getUrlForEntityId(String entityId) throws ClientProtocolException, MalformedURLException, IOException, SynapseException {
+    	return synapse.getFileEntityTemporaryUrlForCurrentVersion(entityId).toString();
     }
 }

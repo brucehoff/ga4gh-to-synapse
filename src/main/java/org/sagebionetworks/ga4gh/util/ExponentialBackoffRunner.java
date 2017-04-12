@@ -11,7 +11,7 @@ import org.sagebionetworks.client.exceptions.SynapseServerException;
 public class ExponentialBackoffRunner {
 	private static Logger log = Logger.getLogger(ExponentialBackoffRunner.class.getName());
 
-	public static int DEFAULT_NUM_RETRY_ATTEMPTS = 8; // 63 sec
+	public static int DEFAULT_NUM_RETRY_ATTEMPTS = 4; // 63 sec
 	private static int NUM_503_RETRY_ATTEMPTS = 16; // 272 min (4h:32m)
 	private static long INITIAL_BACKOFF_MILLIS = 500L;
 	private static long BACKOFF_MULTIPLIER = 2L;
@@ -66,7 +66,7 @@ public class ExponentialBackoffRunner {
 			} catch (Exception e) {
 				lastException=e;
 			}
-			log.warning("Encountered exception on attempt "+i+": "+exceptionMessage(lastException));
+			log.warning("Encountered exception of type "+lastException.getClass()+" on attempt "+i+": "+exceptionMessage(lastException));
 			i++;
 			if (statusCode!=null && HttpStatus.SC_SERVICE_UNAVAILABLE==statusCode) {
 				if (i>=NUM_503_RETRY_ATTEMPTS) break;				

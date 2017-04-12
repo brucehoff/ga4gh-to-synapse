@@ -11,7 +11,6 @@ import org.apache.http.HttpStatus;
 import org.sagebionetworks.client.SynapseClient;
 import org.sagebionetworks.client.SynapseClientImpl;
 import org.sagebionetworks.client.SynapseProfileProxy;
-import org.sagebionetworks.evaluation.model.SubmissionStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +27,8 @@ public class SynapseClientFactory {
 			HttpStatus.SC_GONE, // SynapseDeprecatedServiceException
 			HttpStatus.SC_FORBIDDEN, // SynapseForbiddenException, SynapseTermsOfUseException
 			HttpStatus.SC_UNAUTHORIZED, // SynapseUnauthorizedException
-			HttpStatus.SC_CONFLICT // 409
+			HttpStatus.SC_CONFLICT, // 409
+			HttpStatus.SC_INTERNAL_SERVER_ERROR
 		);
 		
 	private static SynapseClient createSynapseClientIntern() {

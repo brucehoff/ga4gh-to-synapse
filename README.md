@@ -21,15 +21,18 @@ tool:
 
 toolVersion:
 - resistryId
+- metaVersion (the version associated with the metadata)
 - version
 - image - Docker repository name, including version/commit
 - descriptorDescription
-- descriptorFile (Synapse File Handle)
+- descriptorFile (Synapse Entity ID)
 - dockerfileDescription 
-- dockerfileFile (Synapse File Handle)
+- dockerfileFile (Synapse Entity ID)
 
 toolType:
 - name
 - description
 
 This code began with Spring's getting started demo, found here: https://github.com/spring-guides/gs-actuator-service
+
+Note:  src/main/resources/keystore.p12 is a self-signed certificate and should not be used in a production application.
